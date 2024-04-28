@@ -1,57 +1,5 @@
-/**
-\file
-\brief header-only library for resolving dns
-names.
+#include <MicroDNSClient.hpp>
 
-To build with test client, use
-```
-g++ -DMICRODNSCLIENT_MAIN_WANTED MicroDNSClient.cpp -o dnsquery
-```
-and run it like that
-```
-./dnsquery google.com lua.org
-```
-
-To avoid building implementation, use
-```
-g++ -DMICRODNSCLIENT_DEFINITION_DISABLED MicroDNSClient.cpp
-```
-
-Of course you can build just the dynamic library:
-```
-g++ -fPIC -shared -o libMicroDNSClient.so MicroDNSClient.cpp
-```
-*/
-
-#ifndef MICRODNSCLIENT_H
-#define MICRODNSCLIENT_H
-
-#include <arpa/inet.h>
-#include <cstring>
-#include <iostream>
-#include <netdb.h>
-#include <string>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <vector>
-
-/**
-It can only get addresses for domain names.
-Use the only static method.
-*/
-struct MicroDNSClient {
-
-  /**
-  simply get list of ipv6 and ipv4 ips as strings
-  for domain name like example.com
-  \param[in] hostname hostname to get ip list for
-  \return list of ip addresses as vector<string>
-  **/
-  static std::vector<std::string>
-  getAddressesForDomainName(std::string hostname);
-};
-
-#ifndef MICRODNSCLIENT_DEFINITION_DISABLED
 std::vector<std::string>
 MicroDNSClient::getAddressesForDomainName(std::string hostname) {
   std::vector<std::string> addrlist;
@@ -117,6 +65,3 @@ int main(int argc, char *argv[]) {
 
 #endif // MICRODNSCLIENT_MAIN_WANTED
 
-#endif // MICRODNSCLIENT_DEFINITION_DISABLED
-
-#endif // MICRODNSCLIENT_H
