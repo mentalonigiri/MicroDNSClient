@@ -1,5 +1,12 @@
 #include <MicroDNSClient.hpp>
 
+#include <arpa/inet.h>
+#include <cstring>
+#include <iostream>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+
 std::vector<std::string>
 MicroDNSClient::getAddressesForDomainName(std::string hostname) {
   std::vector<std::string> addrlist;
